@@ -1848,7 +1848,7 @@ Juggernaut.fn.connect = function(){
   this.socket.connect();
 };
 
-Juggernaut.fn.subscribe = function(channel, callback){
+Juggernaut.fn.subscribe = function(channel, signature, timestamp, callback){
   if ( !channel ) throw "Must provide a channel";
 
   this.on(channel + ":data", callback);
@@ -1857,6 +1857,8 @@ Juggernaut.fn.subscribe = function(channel, callback){
     var message     = new Juggernaut.Message;
     message.type    = "subscribe";
     message.channel = channel;
+    message.signature = signature;
+    message.timestamp = timestamp;
 
     this.write(message);
   });
